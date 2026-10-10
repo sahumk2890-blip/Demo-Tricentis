@@ -1,0 +1,20 @@
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+
+class BasePage:
+    def __init__(self,driver):
+        self.driver = driver
+        self.wait = WebDriverWait(driver,10)
+
+
+    def click(self,locator):
+        #self.driver.find_element(*locator).click()  #normal
+        self.wait.until(EC.visibility_of_element_located(locator)).click()  #explicit wait
+
+
+    def send_keys(self,locator,text):
+        self.wait.until(EC.visibility_of_element_located(locator)).send_keys(text)
+
+
